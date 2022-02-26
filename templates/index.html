@@ -1,0 +1,64 @@
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+<div class="container">           
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Brand Name</th>
+          <th>Total Profiles</th>
+          <th>Total Fans</th>
+          <th>Total Engagement</th>
+        </tr>
+      </thead>
+      <tbody id="add_brand_name">
+       
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
+
+
+<script>
+
+function getDataProfile(id_get_profile,facebook_page,date1,date2,timezone){
+ 
+        $.ajax({
+            url: "/getDataProfile?id="+id_get_profile+"&profile_type="+facebook_page+"&date1="+date1+"&date2="+date2+"&timezone="+timezone, 
+            success: function(result){
+                console.log(result);
+               // let data=result.resp['44596321012'];
+                  /*  for (var key of Object.keys(data)) {
+                        console.log(key + " -> " + data[key].clicks)
+                    }   */
+                }
+    });
+}
+
+
+      $.ajax({
+          url: "/getBrands", 
+          success: function(result){
+              console.log(result);
+              for(let i=0;i<result.result.length;i++){
+                $("#add_brand_name").append(`<tr> <td>${result.result[i].brandname}</td><td>Moe</td> <td>mary@example.com</td></tr>`);
+                console.log(getDataProfile(result.result[i].profiles[0].id,"facebook_page","1608209422374","1639745412436","Europe/London"));
+              }
+               
+            }
+  });
+</script>
+
+
+
